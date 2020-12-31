@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import client from '@/views/client'
-import admin from '@/views/admin'
+import custom from '@/views/custom'
 
 Vue.use(VueRouter);
 
@@ -9,16 +8,16 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: client,
+    component: custom,
   },
   {
     path: '/admin',
     name: 'admin',
-    component: admin,
+    component: custom,
   },
   {
     path: '*',
-    redirect: { name: 'client' }
+    redirect: { name: 'admin' }
   }
 ];
 

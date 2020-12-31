@@ -1,7 +1,20 @@
 <template>
   <div class="main-container">
     <div class="filters">
-      <a-button></a-button>
+      <a-select
+          v-model="filtered"
+          size="large"
+          mode="multiple"
+          placeholder="Please select"
+          style="width: 500px"
+      >
+        <a-select-option v-for="(filter, index) in filters"
+                         :value="filter.type"
+                         :label="filter.label"
+                         :key="index">
+          {{ filter.label }}
+        </a-select-option>
+      </a-select>
     </div>
 
     <div class="content">
@@ -14,8 +27,12 @@
                 :preview="params.preview"
                 :rating="params.rating"
                 :count="params.count"
+                :recipe="params.recipe"
                 :description="params.description"
+                :enable="params.enable"
+                :is-admin="isAdmin"
                 @updateRating="handleRatingUpdate($event, params)"
+                @switchEnable="handleEnableUpdate($event, params)"
                 @countUpdate="handleCounterUpdate($event, params)"/>
         </template>
       </custom-swiper>
@@ -24,22 +41,30 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex"
+import { mapActions, mapGetters } from "vuex"
 import Card from '@/components/Card'
 import CustomSwiper from '@/components/Swiper'
 
 export default {
-  name: 'client',
+  name: 'admin',
   data() {
     return {
+      filtered: ['long'],
       filters: [
         {
-          type: '',
-          label: '',
-        }
+          type: 'long',
+          label: 'Лонг',
+        },
+        {
+          type: 'short',
+          label: 'Шорт',
+        },
+        {
+          type: 'simple',
+          label: 'Рокс',
+        },
       ],
       swiperOption: {
-        // autoHeight: true,
         pagination: {
           el: '.swiper-pagination',
           clickable: true
@@ -47,7 +72,7 @@ export default {
         breakpoints: {
           // when window width is >= 320px
           640: {
-            slidesPerView: 1,
+            slidesPerView: 2,
             slidesPerColumn: 2,
             spaceBetween: 5,
           },
@@ -72,22 +97,32 @@ export default {
       'getCocktails',
     ]),
     cocktails() {
-      return this.getCocktails && Object.entries(this.getCocktails).map(([key, item]) => ({key, ...item})).filter(item => item.enable) || []
+      let arr = this.getCocktails && Object.entries(this.getCocktails).map(([key, item]) => ({key, ...item})) || []
+      if (!this.isAdmin)
+        arr = arr.filter(item => item.enable)
+      return arr.filter(item => this.filtered.includes(item.type))
+    },
+    isAdmin() {
+      return this.$route.name === 'admin'
     }
   },
   methods: {
     ...mapActions([
       'updateRating',
+      'updateEnable',
       'updateCount',
-      'loadIngredients',
     ]),
     async handleRatingUpdate(val, current) {
       console.log(val, current, 'handleRatingUpdate')
-      await this.updateRating({ key: current.key, value: val})
+      await this.updateRating({ ...current, value: val})
     },
     async handleCounterUpdate(val, current) {
       console.log(val, current, 'handleCounterUpdate')
-      await this.updateCount({ key: current.key, value: val})
+      await this.updateCount({ ...current, value: val})
+    },
+    async handleEnableUpdate(val, current) {
+      console.log(val, current, 'handleEnableUpdate')
+      await this.updateEnable({ ...current, value: val})
     },
   },
   components: {
@@ -98,20 +133,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-//.main-container {
-//  max-width: 1660px;
-//  margin: 0 auto;
-//  display: flex;
-//  flex-direction: column;
-//
-//  .filters {
-//
-//  }
-//
-//  .content {
-//    display: flex;
-//    flex-flow: row wrap;
-//    justify-content: space-between;
-//  }
-//}
+.main-container {
+  display: flex;
+  flex-direction: column;
+
+  .filters {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px 25px;
+    position: fixed;
+    width: 100%;
+    background: #FFF;
+    z-index: 99;
+  }
+
+  .content {
+    padding-top: 70px;
+  }
+}
 </style>

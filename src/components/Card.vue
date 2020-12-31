@@ -280,7 +280,7 @@ $main-padding: 10px 28px;
 
       .preview-container {
         width: 50%;
-        height: 300px;
+        height: 250px;
         display: flex;
         justify-content: center;
         overflow: hidden;
@@ -326,7 +326,7 @@ $main-padding: 10px 28px;
 
           .description {
             overflow-y: auto;
-            max-height: 120px;
+            max-height: 90px;
           }
         }
       }
