@@ -56,7 +56,7 @@ export default {
           label: 'Лонг',
         },
         {
-          type: 'short',
+          type: 'shot',
           label: 'Шорт',
         },
         {
@@ -113,15 +113,12 @@ export default {
       'updateCount',
     ]),
     async handleRatingUpdate(val, current) {
-      console.log(val, current, 'handleRatingUpdate')
       await this.updateRating({ ...current, value: val})
     },
     async handleCounterUpdate(val, current) {
-      console.log(val, current, 'handleCounterUpdate')
       await this.updateCount({ ...current, value: val})
     },
     async handleEnableUpdate(val, current) {
-      console.log(val, current, 'handleEnableUpdate')
       await this.updateEnable({ ...current, value: val})
     },
   },

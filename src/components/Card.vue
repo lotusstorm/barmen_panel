@@ -170,7 +170,7 @@ export default {
         }
       }
 
-      return this.lodash.min(store) || 0
+      return this.lodash.max(store) || 0
     }
   },
   methods: {
@@ -183,7 +183,6 @@ export default {
       this.$emit('updateRating', Math.floor(rating))
     },
     onChange(checked) {
-      console.log(`a-switch to ${checked}`);
       this.$emit('switchEnable', checked)
     },
   },
@@ -328,6 +327,7 @@ $main-padding: 10px 28px;
           .description {
             overflow-y: auto;
             max-height: 70px;
+            line-height: 95%;
           }
         }
       }

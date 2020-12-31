@@ -40,11 +40,8 @@ export default new Vuex.Store({
           }
         }
 
-        console.log(store, 'store')
-
         await firebaseApp.database().ref('cocktails/' + key + '/count').set(value)
         await firebaseApp.database().ref('store').set(store)
-        console.log(key, value, params, 'updateCount')
       } catch (e) {
         console.error(e)
       }
@@ -63,7 +60,6 @@ export default new Vuex.Store({
       try {
         firebaseApp.database().ref('store').on('value', snapshot => {
           const data = snapshot.val();
-          console.log(data, 'loadIngredients')
           commit('saveIngredients', data);
         });
       } catch (e) {
