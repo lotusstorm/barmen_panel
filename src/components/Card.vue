@@ -280,7 +280,7 @@ $main-padding: 10px 28px;
 
       .preview-container {
         width: 50%;
-        height: 250px;
+        height: 200px;
         display: flex;
         justify-content: center;
         overflow: hidden;
@@ -305,7 +305,7 @@ $main-padding: 10px 28px;
 
         .title {
           font-weight: 600;
-          font-size: 16px;
+          font-size: 14px;
         }
 
         .structures {
@@ -317,6 +317,7 @@ $main-padding: 10px 28px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            line-height: 95%;
           }
         }
 
@@ -326,7 +327,7 @@ $main-padding: 10px 28px;
 
           .description {
             overflow-y: auto;
-            max-height: 90px;
+            max-height: 70px;
           }
         }
       }

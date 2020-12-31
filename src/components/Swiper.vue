@@ -26,7 +26,7 @@ export default {
 
 <style lang="scss" scoped>
 .swiper {
-  height: 850px;
+  height: 800px;
   max-width: 1600px;
   margin: 0 auto;
 
