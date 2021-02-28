@@ -170,24 +170,28 @@ export default {
         }
       }
 
-      return this.lodash.max(store) || 0
+      return this.lodash.min(store) || 0
     }
   },
   methods: {
     addNewRating() {
-      this.ratings.push(this.curRating)
-      let rating = this.ratings.reduce((a, b) => a + b, 0) / this.ratings.length
-      if (rating > 10)
-        rating = 10
+      if (this.curRating > 0) {
+        this.ratings.push(this.curRating)
+        let rating = this.ratings.reduce((a, b) => a + b, 0) / this.ratings.length
+        if (rating > 10)
+          rating = 10
 
-      this.$emit('updateRating', Math.floor(rating))
+        this.$emit('updateRating', Math.floor(rating))
+      }
     },
     onChange(checked) {
       this.$emit('switchEnable', checked)
     },
   },
-  created() {
-    this.ratings.push(this.curRating)
+  mounted() {
+    if (this.curRating > 0) {
+      this.ratings.push(this.curRating)
+    }
   },
   watch: {
     curRating: {

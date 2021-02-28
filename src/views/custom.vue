@@ -57,7 +57,7 @@ export default {
         },
         {
           type: 'shot',
-          label: 'Шорт',
+          label: 'Шот',
         },
         {
           type: 'simple',
