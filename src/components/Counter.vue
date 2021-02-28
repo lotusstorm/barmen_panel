@@ -23,18 +23,7 @@ export default {
       default: 0,
     }
   },
-  // data() {
-  //   return {
-  //     currentCount: this.counter,
-  //   }
-  // },
   computed: {
-    // increaseCounter() {
-    //   return this.lodash.debounce(this.handleIncrease, 1500)
-    // },
-    // decreaseCounter() {
-    //   return this.lodash.debounce(this.handleIncrease, 1500)
-    // }
     currentCount: {
       get() {
         return this.counter
@@ -44,18 +33,6 @@ export default {
       },
     }
   },
-  methods: {
-    handleClick() {
-
-    }
-    // handleIncrease() {
-    //   this.$emit('click', this.currentCount)
-    // },
-    // handleDecrease() {
-    //   if (this.counter > 0)
-    //     this.$emit('click', this.currentCount)
-    // },
-  }
 }
 </script>
 

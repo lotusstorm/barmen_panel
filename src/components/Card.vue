@@ -153,7 +153,6 @@ export default {
         return this.count
       },
       set(val) {
-        // this.count > 0
         if (val >= 0)
           this.$emit('countUpdate', val)
       }

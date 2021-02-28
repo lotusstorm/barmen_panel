@@ -43,7 +43,7 @@
 <script>
 import { mapActions, mapGetters } from "vuex"
 import Card from '@/components/Card'
-import CustomSwiper from '@/components/Swiper'
+import CustomSwiper from '@/components/CustomSwiper'
 
 export default {
   name: 'admin',
